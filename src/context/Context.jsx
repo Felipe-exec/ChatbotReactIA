@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import runChat from "../config/gemini";
+import getPythonData from "../components/api_python";
 
 export const Context = createContext();
 
@@ -11,28 +12,77 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
 
-  const onSent = async (prompt) => {
-    await runChat(input);
+  const newChat = () => {
+    setLoading(false);
+    setShowResult(false);
   };
 
+  const onSent = async (prompt) => {
+    setResultData("");
+    setLoading(true);
+    setShowResult(true);
+    let response;
+    setRecentPrompt(input);
+    setPrevPrompts((prev) => [...prev, input]);
+    response = await runChat(input);
+    let responseArray = response.split("**");
+    let formatedResponse = "";
+    for (let i = 0; i < responseArray.length; i++) {
+      if (i == 0 || i % 2 === 0) {
+        formatedResponse += responseArray[i];
+      } else {
+        formatedResponse += "<b>" + responseArray[i] + "</b>";
+      }
+    }
+
+    response = formatedResponse.replace(/\n/g, "<br />");
+
+    setResultData(response);
+    setLoading(false);
+    setInput("");
+  };
+
+  const onSentApi = async (prompt) => {
+    setResultData("");
+    setLoading(true);
+    setShowResult(true);
+    let response;
+    setRecentPrompt(input);
+    setPrevPrompts((prev) => [...prev, input]);
+    response = await getPythonData(input);
+    let responseArray = response.split("**");
+    let formatedResponse = "";
+    for (let i = 0; i < responseArray.length; i++) {
+      if (i == 0 || i % 2 === 0) {
+        formatedResponse += responseArray[i];
+      } else {
+        formatedResponse += "<b>" + responseArray[i] + "</b>";
+      }
+    }
+
+    response = formatedResponse.replace(/\n/g, "<br />");
+    setResultData(response);
+    setLoading(false);
+    setInput("");
+  };
 
   const contextValue = {
-        prevPrompts,
-        setPrevPrompts,
-        onSent,
-        recentPrompt,
-        setRecentPrompt,
-        showResult,
-        loading,
-        resultData,
-        input,
-        setInput
+    prevPrompts,
+    setPrevPrompts,
+    onSent,
+    onSentApi,
+    recentPrompt,
+    setRecentPrompt,
+    showResult,
+    loading,
+    resultData,
+    input,
+    setInput,
+    newChat
   };
 
   return (
-    <Context.Provider value={contextValue}>
-        {props.children}
-    </Context.Provider>
+    <Context.Provider value={contextValue}>{props.children}</Context.Provider>
   );
 };
 
