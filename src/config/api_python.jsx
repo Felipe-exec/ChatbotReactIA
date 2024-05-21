@@ -1,13 +1,14 @@
 import axios from "axios";
-
+const apiKey = import.meta.env.VITE_API_KEY;
+console.log("API_Key:"+apiKey);
 const getPythonData = async (query) => {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api", {
+      const response = await axios.post("https://ifapigemini.azurewebsites.net/api", {
         consulta: query
       },
       {
         headers: {
-            'Authorization': 'AIzaSyDMK3ULxaBRqza9tT5pWwE_7noXtMdZCSA'
+            'Authorization': apiKey
         }
         }
     );

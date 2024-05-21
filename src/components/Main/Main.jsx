@@ -4,6 +4,8 @@ import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
 
 const Main = () => {
+  {console.log(import.meta.env.API_KEY)}
+  
   const {
     onSent,
     onSentApi,
