@@ -12,6 +12,7 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
 
+
   const newChat = () => {
     setLoading(false);
     setShowResult(false);
@@ -23,7 +24,6 @@ const ContextProvider = (props) => {
     setShowResult(true);
     let response;
     setRecentPrompt(input);
-    setPrevPrompts((prev) => [...prev, input]);
     response = await runChat(input);
     let responseArray = response.split("**");
     let formatedResponse = "";
@@ -48,7 +48,6 @@ const ContextProvider = (props) => {
     setShowResult(true);
     let response;
     setRecentPrompt(input);
-    setPrevPrompts((prev) => [...prev, input]);
     response = await getPythonData(input);
     let responseArray = response.split("**");
     let formatedResponse = "";
@@ -61,7 +60,7 @@ const ContextProvider = (props) => {
     }
 
     response = formatedResponse.replace(/\n/g, "<br />");
-    setResultData(response);
+    setResultData((response));
     setLoading(false);
     setInput("");
   };
