@@ -28,33 +28,33 @@ const Main = () => {
   return (
     <div className="main">
       <div className="nav">
-        <p>IFSULDEMINAS Assistente</p>
+        <p>Pokedex Assistente</p>
         <img src={assets.user_icon} alt="" />
       </div>
       <div className="main-container">
         <div className="greet">
           <p>
-            <span>Olá estudante.</span>
+            <span>Olá treinador.</span>
           </p>
           <p>Como posso lhe ajudar hoje?</p>
         </div>
         {!showResult ? (
           <>
             <div className="cards"  >
-              <div className="card" onClick={() => handleCardClick('Sugestões de cursos e atividades')}>
-                <p>Sugestões de cursos e atividades</p>
+              <div className="card" onClick={() => handleCardClick('Quais são as principais cidades pokemon?')}>
+                <p>Quais são as principais cidades pokemon?</p>
                 <img src={assets.compass_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick('Informações sobre vestibular e inscrições')}>
-                <p>Informações sobre vestibular e inscrições</p>
+              <div className="card" onClick={() => handleCardClick('Me fale um pokemon lendário aleatório!')}>
+                <p>Me fale um pokemon lendário aleatório!</p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick('Localização dos campi da instituição')}>
-                <p>Localização dos campi da instituição</p>
+              <div className="card" onClick={() => handleCardClick('Existe algum pokemon flamejante?')}>
+                <p>Existe algum pokemon flamejante?</p>
                 <img src={assets.message_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick('Conheça mais sobre a instituição')}>
-                <p>Conheça mais sobre a instituição</p>
+              <div className="card" onClick={() => handleCardClick('Onde posso saber mais sobre o universo pokemon?')}>
+                <p>Onde posso saber mais sobre o universo pokemon?</p>
                 <img src={assets.code_icon} alt="" />
               </div>
             </div>
@@ -95,9 +95,9 @@ const Main = () => {
             </div>
           </div>
           <p className="bottom-info">
-            IFSULDEMINAS Assistente utiliza uma base de dados própria com
+            Este Chatbot de Pokedex Assistente utiliza uma base de dados própria com
             pesquisa gerada através de embeddings do Gemini. Algumas informações
-            podem ser incorretas, sempre verifique as fonte recomendadas.
+            podem ser incorretas, sempre verifique as fontes recomendadas!
           </p>
         </div>
       </div>
